@@ -1,0 +1,1 @@
+export type LoadingState = 'starting' | 'profile' | 'apps' | 'finished'

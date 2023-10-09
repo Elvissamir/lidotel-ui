@@ -1,0 +1,12 @@
+{
+  "api": {
+    "baseUri": "https://api.txedexchange.dev/tenant"
+  },
+  "app": {
+    "name": "The Exchange",
+    "subtitle": "Starter",
+    "basePath": "",
+    "showEmailPage": false,
+    "showNotificationPage": false
+  }
+}
