@@ -12,11 +12,11 @@ interface SendNotificationParams extends SendNotificationFormData {}
 
 const useNotificationsService = () => {
     const { userProfile } = useContext(UserProfileContext)
-    const { auth, LidotelAppConfig } = useContext(LidotelAuthDataContext)
+    const { LidotelAppConfig } = useContext(LidotelAuthDataContext)
     const { LidotelStarterApi } = useContext(StarterAppContext)
 
     const sendNotification = async ({ to, from, message, createdByUser }: SendNotificationParams) => {
-        if (userProfile && auth && LidotelAppConfig) {
+        if (userProfile && LidotelAppConfig) {
             const request: SendNotificationRequest = {
                 to,
                 subscriberId: to,

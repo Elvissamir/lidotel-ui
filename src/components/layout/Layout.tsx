@@ -1,13 +1,11 @@
 import { Flex } from "@chakra-ui/react"
-import { AuthContextProps } from "react-oidc-context"
 import { useLocation } from "react-router-dom"
-import { EdxAppConfig, useRouteLayoutSelector } from "lidotel-ui"
+import { LidotelAppConfig, useRouteLayoutSelector } from "lidotel-ui"
 import DefaultLayoutWrapper from "./DefaultLayoutWrapper"
 import { SideBarContextProvider } from "../../context/SideBarContext"
 
 interface LayoutProps {
-    auth: AuthContextProps
-    LidotelAppConfig: EdxAppConfig
+    LidotelAppConfig: LidotelAppConfig
     content: JSX.Element
     notificationBarMessage: string
     simpleLayoutRouteList: string[]
@@ -15,7 +13,7 @@ interface LayoutProps {
     onLogout: () => Promise<void>
 }
 
-const Layout = ({ auth, LidotelAppConfig, content, notificationBarMessage, simpleLayoutRouteList, isClosingSession, onLogout }: LayoutProps) => {
+const Layout = ({ LidotelAppConfig, content, notificationBarMessage, simpleLayoutRouteList, isClosingSession, onLogout }: LayoutProps) => {
     const location = useLocation()
     const { routeHasDefaultLayout } = useRouteLayoutSelector()
 
@@ -25,7 +23,6 @@ const Layout = ({ auth, LidotelAppConfig, content, notificationBarMessage, simpl
                 <SideBarContextProvider>
                     {routeHasDefaultLayout(simpleLayoutRouteList, location.pathname)?  
                         <DefaultLayoutWrapper 
-                            auth={auth}
                             LidotelAppConfig={LidotelAppConfig}
                             content={content}
                             notificationBarMessage={notificationBarMessage}

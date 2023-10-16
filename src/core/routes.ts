@@ -2,24 +2,20 @@ import { Route } from "lidotel-ui"
 
 interface AppRoute {
     home: Route
-    app: Route 
-    tables: Route 
-    forms: Route
-    graphs: Route
-    emails: Route
-    notifications: Route
+    users: Route
+    hosts: Route
+    rooms: Route
+    delivery: Route 
     authCallback: Route
     notFound: Route
 }
 
 const routes: AppRoute = {
-    home: { url: '/', name: 'Home' },
-    app: { url: '/app', name: 'App' },
-    tables: { url: '/tables', name: 'Tables' },
-    forms: { url: '/forms', name: 'Forms' },
-    graphs: { url: '/graphs', name: 'Graphs' },
-    emails: { url: '/emails', name: 'Emails' },
-    notifications: { url: '/notifications', name: 'Notifications' },
+    home: { url: '/', name: "Inicio" },
+    users: { url: '/usuarios', name: "Usuarios" },
+    hosts: { url: '/huespedes', name: "Huespedes" },
+    rooms: { url: '/habitaciones', name: "Habitaciones" },
+    delivery: { url: '/delivery', name: "Delivery" },
     authCallback: { url: '/callback', name: 'Auth Callback' },
     notFound: { url: '/not-found', name: 'Not Found' }
 }

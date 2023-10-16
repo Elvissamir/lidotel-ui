@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { EdxAppConfig } from "lidotel-ui"
+import { LidotelAppConfig } from "lidotel-ui"
 
 interface UseFetchAppAuthConfig {
     env: string | undefined
@@ -34,8 +34,8 @@ const fetchConfig = async ({ env, serverMode }: FetchConfigParams) => {
     return config
 }
 
-export const mapEdxToAppConfig = (LidotelConfig): EdxAppConfig => {
-    const authConfig: EdxAppConfig = {
+export const mapEdxToAppConfig = (LidotelConfig): LidotelAppConfig => {
+    const authConfig: LidotelAppConfig = {
         title: LidotelConfig.app.subtitle,
         appName: LidotelConfig.app.subtitle,
         api: LidotelConfig.api.baseUri,
@@ -47,7 +47,7 @@ export const mapEdxToAppConfig = (LidotelConfig): EdxAppConfig => {
 }
 
 const useFetchConfig = ({ env, serverMode }: UseFetchAppAuthConfig) => {
-    const [appConfig, setAppConfig] = useState<EdxAppConfig | null>(null)
+    const [appConfig, setAppConfig] = useState<LidotelAppConfig | null>(null)
 
     const fetchAppConfig = async () => {
         const LidotelConfig = await fetchConfig({ env, serverMode })

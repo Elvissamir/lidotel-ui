@@ -18,11 +18,11 @@ interface SendEmailParams {
 
 const useEmailService = () => {
     const { userProfile } = useContext(UserProfileContext)
-    const { auth, LidotelAppConfig } = useContext(LidotelAuthDataContext)
+    const { LidotelAppConfig } = useContext(LidotelAuthDataContext)
     const { LidotelStarterApi } = useContext(StarterAppContext)
 
     const sendEmail = async ({ to, from, message }: SendEmailParams) => {
-        if (userProfile && auth && LidotelAppConfig) {
+        if (userProfile && LidotelAppConfig) {
             const request: SendEmailRequest = {
                 to,
                 subscriberId: to,

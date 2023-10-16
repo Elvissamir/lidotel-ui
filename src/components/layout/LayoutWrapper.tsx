@@ -4,20 +4,17 @@ import AppRouter from "../routes/AppRouter"
 import { 
     SessionInactiveModal, 
     LoadingScreen,
-    EdxAppConfig,
-    useAuthAutoRefresh, 
+    LidotelAppConfig,
     useAuthActions, 
     useLoadingState,
     useIdleSession,
-    LidotelAuthDataContext,
-    AuthContextProps} from "lidotel-ui" 
+    LidotelAuthDataContext } from "lidotel-ui" 
 import { Helmet } from "react-helmet-async"
 import Layout from "./Layout"
 import simpleLayoutRoutes from "../../core/layoutRoutes"
 
 const LayoutWrapper = () => {
-    useAuthAutoRefresh()
-    const {auth, LidotelAppConfig} = useContext(LidotelAuthDataContext)
+    const { LidotelAppConfig} = useContext(LidotelAuthDataContext)
     const { handleLogOut } = useAuthActions()
     const { loadingState, stateMessage } = useLoadingState()
     const { showInactiveModal, onCloseInactiveModal } = useIdleSession({ timeout: 10000 * 60 })
@@ -28,8 +25,6 @@ const LayoutWrapper = () => {
 
         setIsClosingSession(true)
     }
-
-    console.log("expires in - updated SAMPLE APP",  auth && auth.user? ((auth.user.expires_in as number) / 60) : 'not defined')
 
     return (
         <Flex 
@@ -47,8 +42,7 @@ const LayoutWrapper = () => {
                         onLogout={onLogout}
                         onClose={onCloseInactiveModal} />
                     <Layout 
-                        auth={auth as AuthContextProps}
-                        LidotelAppConfig={LidotelAppConfig as EdxAppConfig}
+                        LidotelAppConfig={LidotelAppConfig as LidotelAppConfig}
                         content={<AppRouter />}
                         notificationBarMessage='The Exchange Online Community is now live!'
                         simpleLayoutRouteList={simpleLayoutRoutes}

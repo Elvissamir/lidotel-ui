@@ -1,27 +1,24 @@
 import { useContext } from 'react'
-import { AppsMenuMoreOption, AuthContextProps, EdxAppConfig, DefaultLayout, ExternalAppsContext, fetchUserApps, Footer, NotificationBar, TopBar, TopBarLeft, TopBarRight, useAuthActions, useNotificationsBar, UserProfileContext, SideBar } from "lidotel-ui"
+import { AppsMenuMoreOption, DefaultLayout, fetchUserApps, Footer, NotificationBar, TopBar, TopBarLeft, TopBarRight, useAuthActions, useNotificationsBar, UserProfileContext, SideBar, LidotelAppConfig } from "lidotel-ui"
 import { Flex } from '@chakra-ui/react'
 import { SideBarContext } from "../../context/SideBarContext"
 
 interface DefaultLayoutContentProps {
-    auth: AuthContextProps
-    LidotelAppConfig: EdxAppConfig
+    LidotelAppConfig: LidotelAppConfig
     content: JSX.Element
     notificationBarMessage: string
     isClosingSession: boolean
     onLogout: () => Promise<void>
 }
 
-const DefaultLayoutWrapper = ({ auth, LidotelAppConfig, content, notificationBarMessage, isClosingSession, onLogout }: DefaultLayoutContentProps) => {
+const DefaultLayoutWrapper = ({ LidotelAppConfig, content, isClosingSession, onLogout }: DefaultLayoutContentProps) => {
     const { userProfile } = useContext(UserProfileContext)
-    const { externalApps } = useContext(ExternalAppsContext)
-    const { handleLogIn, handleChangeTenantId } = useAuthActions()
-    const { showNotificationsBar, onCloseNotificationsBar } = useNotificationsBar({ show: true })
+    const { handleLogIn } = useAuthActions()
     const { items, selectedItemId, onChangeSelectedItem } = useContext(SideBarContext)
 
     const handleTestClick = async () => {
-        if (auth.user && userProfile && LidotelAppConfig) {
-            const appsList = await fetchUserApps(auth.user.access_token, userProfile?.tenantId, LidotelAppConfig.api.baseUri as string)
+        if (userProfile && LidotelAppConfig) {
+            const appsList = await fetchUserApps("", userProfile?.tenantId, LidotelAppConfig.api.baseUri as string)
 
             console.log('test list', appsList)
         }
@@ -38,22 +35,17 @@ const DefaultLayoutWrapper = ({ auth, LidotelAppConfig, content, notificationBar
             topBar={<TopBar 
                 leftComponent={<TopBarLeft 
                     appName={LidotelAppConfig.app.subtitle}
-                    list={externalApps}
+                    list={[]}
                     menuOptions={moreOptions} />}
                 rightComponent={<TopBarRight 
                     profileData={userProfile}
                     isClosingSession={isClosingSession}
                     onLogin={handleLogIn}
                     onLogout={onLogout}
-                    onChangeTenantId={handleChangeTenantId}
+                    onChangeTenantId={() => Promise.resolve()}
                 />} />}
             notificationBar={
-                <Flex onClick={handleTestClick} w='full' mt='-10px'>
-                    <NotificationBar 
-                        show={showNotificationsBar}
-                        onClose={onCloseNotificationsBar} 
-                        content={notificationBarMessage} />
-                </Flex>}
+                <Flex onClick={handleTestClick} w='full' mt='-10px' />}
             content={<Flex w='full'>
                     <Flex className="sidebar" minH='100vh' h='auto'>
                         <SideBar 

@@ -1,20 +1,20 @@
 import { useContext } from 'react'
-import Page from './Page'
-import HomePageContent from './HomePageContent'
-import { LidotelAuthDataContext, UserProfileContext } from 'lidotel-ui'
+import { LidotelAuthDataContext, UserProfileContext } from "lidotel-ui"
+import LoginPageContent from "./LoginPageContent"
+import Page from "./Page"
 
-const HomePage = () => {
+const LoginPage = () => {
     const { LidotelAppConfig } = useContext(LidotelAuthDataContext)
     const { userProfile } = useContext(UserProfileContext)
 
     return (
         <Page 
             appName={LidotelAppConfig? LidotelAppConfig.app.subtitle as string : ''}
-            heading=''
+            heading='Inicio de Sesión'
             title={userProfile? 'Home' : 'Loading...'}>
-                <HomePageContent userProfile={userProfile} />    
+                <LoginPageContent />    
         </Page>
     )
 }
 
-export default HomePage
+export default LoginPage

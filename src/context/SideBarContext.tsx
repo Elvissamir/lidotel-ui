@@ -1,15 +1,14 @@
-import { BellIcon, EmailIcon } from "@chakra-ui/icons";
-import { SideBarMenuItemData } from "lidotel-ui/dist/components/layout/SideBar";
-import { createContext, useContext, useState } from "react";
-import { AiOutlineTable } from "react-icons/ai";
-import { FaWpforms } from "react-icons/fa";
-import { GoGraph } from "react-icons/go";
-import { HiHome } from "react-icons/hi";
-import { useNavigate } from "react-router-dom";
-import routes from "../core/routes";
-import { StarterAppContext } from "./StarterAppContext";
+import { SideBarMenuItemData } from "lidotel-ui/dist/components/layout/SideBar"
+import { createContext, useState } from "react"
+import { FaUser } from "react-icons/fa"
+import { HiHome } from "react-icons/hi"
+import { TbDoor } from "react-icons/tb"
+import { BiSolidUserPin } from 'react-icons/bi'
+import { MdDeliveryDining } from 'react-icons/md'
+import { useNavigate } from "react-router-dom"
+import routes from "../core/routes"
 
-type SideBarItemType = "tables" | "forms" | "graphs" | "home" | "emails" | "notifications"
+type SideBarItemType = "home" | "users" | "hosts" | "rooms" | "delivery"
 
 interface SideBarContextData {
     items: SideBarMenuItemData[]
@@ -18,12 +17,11 @@ interface SideBarContextData {
 }
 
 const items: SideBarMenuItemData[] = [
-    { text: 'Home', id: 'home', icon: <HiHome /> },
-    { text: 'Tables', id: 'tables', icon: <AiOutlineTable /> },
-    { text: 'Forms', id: 'forms', icon: <FaWpforms /> },
-    { text: 'Graphs', id: 'graphs', icon: <GoGraph /> },
-    { text: 'Emails', id: "emails", icon: <EmailIcon /> },
-    { text: "Notifications", id: 'notifications', icon: <BellIcon /> }
+    { text: 'Inicio', id: 'home', icon: <HiHome /> },
+    { text: 'Usuarios', id: 'users', icon: <FaUser /> },
+    { text: 'Huespedes', id: 'hosts', icon: <BiSolidUserPin /> },
+    { text: 'Habitaciones', id: 'rooms', icon: <TbDoor /> },
+    { text: 'Pedidos', id: 'delivery', icon: <MdDeliveryDining /> }
 ]
 
 const SideBarContext = createContext<SideBarContextData>({
@@ -39,45 +37,18 @@ interface SideBarContextProviderProps {
 const SideBarContextProvider = ({ children }: SideBarContextProviderProps) => {
     const navigate = useNavigate()
     const [selectedItemId, setSelectedItemId] = useState<SideBarItemType>("home")
-    const starterConfig = useContext(StarterAppContext)
-
-    const shouldShowEmailItem = (item: SideBarMenuItemData) => {
-        if (item.id === 'emails') {
-            if (starterConfig.showEmailPage) 
-                return true 
-            
-            return false
-        }
-
-        return true
-    }
-
-    const shouldShowNotificationItem = (item: SideBarMenuItemData) => {
-        if (item.id === 'notifications') {
-            if (starterConfig.showEmailPage) 
-                return true 
-            
-            return false
-        }
-
-        return true
-    }
 
     const onChangeSelectedItem = (id: string) => {
         setSelectedItemId(id as SideBarItemType)
 
-        console.log('id', id)
-
-        if (id === 'graphs')
-           return navigate(routes.graphs.url)
-        else if (id === 'tables')
-            return navigate(routes.tables.url)
-        else if (id === 'forms')
-            return navigate(routes.forms.url)
-        else if (id === 'emails')
-            return navigate(routes.emails.url)
-        else if (id === 'notifications')
-            return navigate(routes.notifications.url)
+        if (id === "users")
+           return navigate(routes.users.url)
+        else if (id === 'hosts')
+            return navigate(routes.hosts.url)
+        else if (id === 'rooms')
+            return navigate(routes.rooms.url)
+        else if (id === 'delivery')
+            return navigate(routes.delivery.url)
 
         return navigate(routes.home.url)
     }
@@ -85,10 +56,10 @@ const SideBarContextProvider = ({ children }: SideBarContextProviderProps) => {
     return (
         <SideBarContext.Provider value={{ 
             selectedItemId, 
-            items: items.filter(item => shouldShowEmailItem(item)).filter(item => shouldShowNotificationItem(item)), 
+            items: items, 
             onChangeSelectedItem 
         }}>
-                {children}
+            {children}
         </SideBarContext.Provider>
     )
 }
