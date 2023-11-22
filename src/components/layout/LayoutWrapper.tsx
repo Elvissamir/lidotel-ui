@@ -36,11 +36,6 @@ const LayoutWrapper = () => {
                     <Helmet>
                         <title>The Exchange | {stateMessage}</title>
                     </Helmet>
-                    <SessionInactiveModal
-                        show={showInactiveModal}
-                        isClosingSession={isClosingSession}
-                        onLogout={onLogout}
-                        onClose={onCloseInactiveModal} />
                     <Layout 
                         LidotelAppConfig={LidotelAppConfig as LidotelAppConfig}
                         content={<AppRouter />}
