@@ -44,6 +44,5 @@ vite.config.ts.*
 #Config Files
 local.config.json
 frontend.config.json
-config.json
 # Local Netlify folder
 .netlify

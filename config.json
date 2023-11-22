@@ -1,0 +1,12 @@
+{
+  "api": {
+    "baseUri": "http://localhost:5086"
+  },
+  "app": {
+    "name": "The Exchange",
+    "subtitle": "",
+    "basePath": "",
+    "showEmailPage": false,
+    "showNotificationPage": false
+  }
+}
