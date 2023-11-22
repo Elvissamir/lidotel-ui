@@ -11,7 +11,7 @@ const RoomsPage = () => {
         <Page 
             appName={LidotelAppConfig? LidotelAppConfig.app.subtitle as string : ''}
             heading=''
-            title={userProfile? 'Home' : 'Loading...'}>
+            title={userProfile? 'Habitaciones' : 'Loading...'}>
                 <RoomsPageContent />    
         </Page>
     )

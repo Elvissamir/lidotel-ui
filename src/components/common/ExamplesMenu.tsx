@@ -57,7 +57,7 @@ const ExamplesMenu = () => {
     return (
         <Flex
             display='grid'
-            gridTemplateColumns='repeat(4, 340px)'
+            gridTemplateColumns='repeat(4, 310px)'
             gap='20px'
             wrap='wrap'
             justifyContent='start'

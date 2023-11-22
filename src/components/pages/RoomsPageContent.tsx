@@ -1,51 +1,74 @@
-import { Card, Flex, Text } from "@chakra-ui/react"
+import { Flex, Grid, GridItem, Text } from "@chakra-ui/react"
+import { Room } from "../../core/rooms/Room.types"
+import RoomCard from "../common/rooms/RoomCard"
 
-type RoomStatus = "Available" | "Unavailable" | "Disabled"
-type RoomType = "Custom" | "Resort"
-
-interface IRoom {
-    status: RoomStatus
-    from: string 
-    to: string 
-    users: number 
-    description: RoomType
-}
-
-const rooms: IRoom[] = [
+const rooms: Room[] = [
     { 
+        roomId: '1',
         status: 'Available', 
-        from: "01/10/2023", 
-        to: "02/10/2023",
-        users: 2,
-        description: "Custom"
+        occupiedFrom: "01/10/2023", 
+        occupiedUntil: "02/10/2023",
+        hostsCount: 2,
+        description: "Hab",
+        type: 'Hab',
+        roomNumber: 1
     },
     { 
+        roomId: '2',
+        status: 'Unavailable', 
+        occupiedFrom: "01/10/2023", 
+        occupiedUntil: "02/10/2023",
+        hostsCount: 2,
+        description: "Hab",
+        type: 'Hab',
+        roomNumber: 2
+    },
+    {   roomId: '3',
         status: 'Available', 
-        from: "01/10/2023", 
-        to: "02/10/2023",
-        users: 2,
-        description: "Resort"
+        occupiedFrom: "01/10/2023", 
+        occupiedUntil: "02/10/2023",
+        hostsCount: 2,
+        description: "Hab",
+        type: 'Hab',
+        roomNumber: 3
     },
     { 
-        status: 'Available', 
-        from: "01/10/2023", 
-        to: "02/10/2023",
-        users: 2,
-        description: "Resort"
+        roomId: '4',
+        status: 'Disabled', 
+        occupiedFrom: "01/10/2023", 
+        occupiedUntil: "02/10/2023",
+        hostsCount: 1,
+        description: "Hab",
+        type: 'Hab',
+        roomNumber: 5
+    },
+    { 
+        roomId: '5',
+        status: 'Unavailable', 
+        occupiedFrom: "01/10/2023", 
+        occupiedUntil: "02/10/2023",
+        hostsCount: 1,
+        description: "Hab",
+        type: 'Hab',
+        roomNumber: 5
     }
 ]
 
 const RoomsPageContent = () => {
     return (
         <>
-            <Flex flexDirection='column' w='full'>
-                {rooms.map((room, index) => 
-                    <Card w='250px'>
-                        <Flex w='full'>
-                            <Text>Habitación {index}</Text>
-                        </Flex>
-                    </Card>
-                )}
+            <Flex flexDirection="column" w='full'>
+                <Text fontSize='32px' fontWeight='bold'>Habitaciones</Text>
+                <Grid 
+                    templateColumns='repeat(3, 1fr)' 
+                    gridGap='20px'
+                    mt='25px'>
+                        {rooms.map((room, index) => 
+                            <GridItem key={index}>
+                                <RoomCard key={index} data={room} />
+                            </GridItem>
+                        )}
+                </Grid>
             </Flex>
         </>
     )

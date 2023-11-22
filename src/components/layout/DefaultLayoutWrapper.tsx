@@ -1,7 +1,8 @@
 import { useContext } from 'react'
-import { AppsMenuMoreOption, DefaultLayout, fetchUserApps, Footer, NotificationBar, TopBar, TopBarLeft, TopBarRight, useAuthActions, useNotificationsBar, UserProfileContext, SideBar, LidotelAppConfig } from "lidotel-ui"
+import { AppsMenuMoreOption, DefaultLayout, fetchUserApps, Footer, TopBar, TopBarLeft, TopBarRight, useAuthActions, UserProfileContext, SideBar, LidotelAppConfig } from "lidotel-ui"
 import { Flex } from '@chakra-ui/react'
 import { SideBarContext } from "../../context/SideBarContext"
+import routes from '../../core/routes'
 
 interface DefaultLayoutContentProps {
     LidotelAppConfig: LidotelAppConfig
@@ -30,6 +31,13 @@ const DefaultLayoutWrapper = ({ LidotelAppConfig, content, isClosingSession, onL
         { name: "Help", url: null }
     ]
 
+    const showSideBar = () => {
+        if (window.location.pathname.includes(routes.guestRoom.url))
+            return false
+
+        return true
+    }
+
     return (
         <DefaultLayout
             topBar={<TopBar 
@@ -47,14 +55,14 @@ const DefaultLayoutWrapper = ({ LidotelAppConfig, content, isClosingSession, onL
             notificationBar={
                 <Flex onClick={handleTestClick} w='full' mt='-10px' />}
             content={<Flex w='full'>
-                    <Flex className="sidebar" minH='100vh' h='auto'>
+                    { showSideBar() && <Flex className="sidebar" minH='100vh' h='auto'>
                         <SideBar 
                             show={true}
                             selectedItemId={selectedItemId}
                             ariaCurrentType='page'
                             onClickItem={onChangeSelectedItem}
                             items={items} />
-                    </Flex>
+                    </Flex>}
                     {content}
             </Flex>}
             footer={<Footer />} />

@@ -11,7 +11,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.5.1",
-    "lidotel-ui": "2.0.2",
+    "lidotel-ui": "2.0.6",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
     "@fontsource/archivo-narrow": "^4.5.12",

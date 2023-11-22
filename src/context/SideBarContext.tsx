@@ -4,11 +4,11 @@ import { FaUser } from "react-icons/fa"
 import { HiHome } from "react-icons/hi"
 import { TbDoor } from "react-icons/tb"
 import { BiSolidUserPin } from 'react-icons/bi'
-import { MdDeliveryDining } from 'react-icons/md'
+import { MdDeliveryDining, MdOutlineBookmarkBorder } from 'react-icons/md'
 import { useNavigate } from "react-router-dom"
 import routes from "../core/routes"
 
-type SideBarItemType = "home" | "users" | "hosts" | "rooms" | "delivery"
+type SideBarItemType = "home" | "users" | "hosts" | "rooms" | "orders" | "delivery"
 
 interface SideBarContextData {
     items: SideBarMenuItemData[]
@@ -21,6 +21,7 @@ const items: SideBarMenuItemData[] = [
     { text: 'Usuarios', id: 'users', icon: <FaUser /> },
     { text: 'Huespedes', id: 'hosts', icon: <BiSolidUserPin /> },
     { text: 'Habitaciones', id: 'rooms', icon: <TbDoor /> },
+    { text: "Ordenes", id: "orders", icon: <MdOutlineBookmarkBorder /> },
     { text: 'Pedidos', id: 'delivery', icon: <MdDeliveryDining /> }
 ]
 
@@ -47,6 +48,8 @@ const SideBarContextProvider = ({ children }: SideBarContextProviderProps) => {
             return navigate(routes.hosts.url)
         else if (id === 'rooms')
             return navigate(routes.rooms.url)
+        else if (id === 'orders')
+            return navigate(routes.orders.url)
         else if (id === 'delivery')
             return navigate(routes.delivery.url)
 
